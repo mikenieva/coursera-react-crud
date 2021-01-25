@@ -14,12 +14,35 @@ export default function Main () {
 
       // 2. FORMULARIO
 
-      const handleChange = () => {}
+      const handleChange = (event) => {
+        event.preventDefault();
+        
+        setNewComment({
+          ...newComment,
+          id: nanoid(),
+          [event.target.name]: event.target.value,
+        });
+      };
 
 
       // 3. CRUD
 
-      const addComment = () => {}
+      const addComment = (event) => {
+        event.preventDefault();
+    
+        if (!newComment.title.trim() || !newComment.description.trim()) {
+          setError("Escriba algo por favor...");
+          return;
+        }
+    
+        setComments([newComment, ...comments]);
+        setNewComment({
+          title: "",
+          description: "",
+        });
+        setError(null);
+      };
+      
       const deleteComment = () => {}
       const editComment = () => {}
       const edit = () => {}
@@ -33,22 +56,36 @@ export default function Main () {
             <h2>Caja de Comentarios</h2> 
             {/* FORMULARIO */}
             <div> 
-                <form>
+                <form onSubmit={addComment}>
                     <h3>Asunto</h3>
-                    <input></input>
+                    <input
+                        name="title"
+                        onChange={(e) => handleChange(e)}
+                        value={newComment.title}
+                    />
                     <h3>Descripción</h3>
-                    <input></input>
+                    <textarea 
+                    name="description"
+                    rows="3"
+                    onChange={(e) => handleChange(e)}
+                    value={newComment.description}
+                    />
                     <button>Agregar</button>
                 </form>
             </div>
             {/* LISTADO DE COMENTARIOS */}
             <div>
-                <article>
-                    <div>
-                        <h3>Título del comentario</h3>
-                        <p>Descripción del comentario</p>
-                    </div>
-                </article>
+            {comments.map((element, i) => 
+                (
+                    <article key={i}>
+                        <div>
+                            <h3>{element.title}</h3>
+                            <p>{element.description}</p>
+                        </div>
+                    </article>
+                    )
+                )
+            }
             </div>
           </>
       )
