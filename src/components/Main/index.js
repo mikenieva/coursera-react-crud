@@ -43,9 +43,15 @@ export default function Main () {
         setError(null);
       };
       
-      const deleteComment = () => {}
+      const deleteComment = () => {
+          console.log("Botón borrado")
+      };
+      
       const editComment = () => {}
-      const edit = () => {}
+
+      const edit = () => {
+            console.log("Botón borrado")
+      }
 
 
       // 4. RETORNO
@@ -69,12 +75,13 @@ export default function Main () {
                     rows="3"
                     onChange={(e) => handleChange(e)}
                     value={newComment.description}
+                    
                     />
                     <button>Agregar</button>
                 </form>
             </div>
-            {/* LISTADO DE COMENTARIOS */}
-            <div>
+          {/* LISTADO DE COMENTARIOS */}
+          <div>
             {comments.map((element, i) => 
                 (
                     <article key={i}>
@@ -82,11 +89,24 @@ export default function Main () {
                             <h3>{element.title}</h3>
                             <p>{element.description}</p>
                         </div>
+												<div>
+				                  <button
+			                    onClick={() => deleteComment()}
+													>
+														Eliminar
+				                  </button>
+				                  <button
+				                    onClick={() => edit()}
+													>
+				                    Editar
+				                  </button>
+				                </div>
                     </article>
                     )
                 )
             }
             </div>
+
           </>
       )
 
