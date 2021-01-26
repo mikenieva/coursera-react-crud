@@ -50,7 +50,7 @@ export default function Main () {
       const editComment = () => {}
 
       const edit = () => {
-            console.log("Botón borrado")
+            console.log("Botón editado")
       }
 
 
